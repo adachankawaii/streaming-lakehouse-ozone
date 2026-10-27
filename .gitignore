@@ -41,8 +41,11 @@ platform/observability/prometheus/data/
 .idea/
 .DS_Store
 Thumbs.db
+.github/
+
 
 # Generated local catalog configs with S3 credentials
 platform/flink/config/init.sql
 platform/iceberg/config/create-warehouse.json
 platform/trino/catalog/lakehouse.properties
+
