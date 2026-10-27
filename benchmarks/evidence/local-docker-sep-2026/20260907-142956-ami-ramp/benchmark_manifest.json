@@ -1,0 +1,56 @@
+{
+  "run_id": "20260907-142956-ami-ramp",
+  "created_at_utc": "2026-09-07T07:30:00.464+00:00",
+  "job_id": "1187070e9b10a5b91d98ffd3d7bad8cc",
+  "job_name": "insert-into_lakehouse.bronze.ami_meter_raw",
+  "topic": "ami.meter.events",
+  "consumer_group": "bronze-ami-meter-v1",
+  "stage_seconds": 60,
+  "sample_interval_seconds": 2.0,
+  "storage_sample_interval_seconds": 10.0,
+  "drain_seconds": 180,
+  "ozone_table_path": "ofs://om/s3v/warehouse/bronze-01a066c9-4dc2-74d3-b0e8-a7562bbfce69/ami_meter_raw-01a066c9-76de-7123-96bf-f2fbb5003803",
+  "metric_map": {
+    "flink_pending_records": null,
+    "flink_current_offset_metrics": [],
+    "flink_source_native_rate": null,
+    "flink_kafka_consumer_rate": null,
+    "flink_commits_succeeded": null,
+    "flink_commits_failed": null,
+    "iceberg_last_checkpoint_duration_ms": null,
+    "iceberg_last_commit_duration_ms": null,
+    "iceberg_committed_data_files": null,
+    "iceberg_committed_records": null,
+    "iceberg_committed_bytes": null,
+    "iceberg_seconds_since_last_commit": null
+  },
+  "kafka_offsets_start": {
+    "0": {
+      "current": 189050,
+      "log_end": 189050,
+      "lag": 0
+    },
+    "1": {
+      "current": 194381,
+      "log_end": 194381,
+      "lag": 0
+    },
+    "2": {
+      "current": 183769,
+      "log_end": 183769,
+      "lag": 0
+    }
+  },
+  "kafka_committed_lag_start": 0,
+  "flink_pending_records_start": null,
+  "notes": {
+    "kafka_input_rate_eps": "Delta of Kafka LOG-END-OFFSET / wall-clock seconds.",
+    "kafka_committed_consume_rate_eps": "Delta of Kafka consumer-group committed CURRENT-OFFSET / wall-clock seconds. Diagnostic only; it is not treated as the authoritative live Flink backlog.",
+    "flink_pending_records": "Native KafkaSource pendingRecords aggregated across source subtasks. This is the primary live-source backlog signal.",
+    "flink_source_read_rate_eps": "Delta of the sum of KafkaSource per-partition currentOffset gauges divided by wall-clock time. Primary processed/read throughput metric.",
+    "flink_source_native_rate_eps": "Native KafkaSource numRecordsOutPerSecond rate meter. Kept for diagnostics because it is smoothed and can remain nonzero briefly after input stops.",
+    "flink_kafka_consumer_rate_eps": "KafkaConsumer records-consumed-rate aggregated across source subtasks; used as a cross-check.",
+    "ozone_logical_bytes": "Logical file bytes reported by ozone fs -ls, not RATIS physical replicated bytes.",
+    "storage_inventory": "Sampled less frequently to reduce observer overhead."
+  }
+}

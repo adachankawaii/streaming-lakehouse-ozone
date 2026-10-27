@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "event_id": "ami-e-partial-000001",
+  "event_type": "READING",
+  "meter_id": "M00129",
+  "event_time": "2026-08-28T16:05:00+07:00",
+  "sequence_no": 2,
+  "interval_seconds": 900,
+  "phase_count": 1,
+  "voltage_l1_v": 229.1,
+  "current_l1_a": 10.8,
+  "active_power_kw": 2.42,
+  "frequency_hz": 50.00,
+  "power_factor": 0.982,
+  "meter_status": "NORMAL",
+  "quality_code": "GOOD"
+}

@@ -1,0 +1,5 @@
+timestamp_utc,stage,last_commit_duration_ms,committed_data_files,committed_records,committed_bytes,seconds_since_last_successful_commit
+2026-09-07T03:55:25.999+00:00,ramp-1k,235.0,29,11650,1973690,1.0
+2026-09-07T03:55:37.150+00:00,ramp-2k,436.0,31,26100,4044013,1.0
+2026-09-07T03:55:57.456+00:00,drain,208.0,33,59450,8750696,9.0
+2026-09-07T03:56:10.492+00:00,drain,407.0,35,87200,12651969,0.0

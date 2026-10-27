@@ -1,0 +1,4 @@
+﻿"timestamp_local","elapsed_s","event","simulator_state","datanode_container_state","flink_state","kafka_committed_total","kafka_log_end_total","kafka_lag_total","checkpoint_completed","checkpoint_failed","checkpoint_in_progress","latest_checkpoint_duration_ms"
+"2026-09-07T16:22:44.1850046+07:00","1.76","SIMULATOR_STARTED","Running","running","RUNNING","635129","635129","0","348","0","0","45"
+"2026-09-07T16:22:46.3167957+07:00","3.89","SAMPLE","Failed","running","RUNNING","635129","635169","40","348","0","0","45"
+"2026-09-07T16:22:48.8896571+07:00","6.46","SIMULATOR_ENDED_EARLY","Failed","running","RUNNING","635129","635291","162","349","0","0","130"

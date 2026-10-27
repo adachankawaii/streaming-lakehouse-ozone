@@ -1,0 +1,82 @@
+services:
+  flink-jobmanager:
+    build:
+      context: ./platform/flink
+      dockerfile: Dockerfile
+    image: ozone-lakehouse-flink:2.1.3
+    hostname: flink-jobmanager
+    command: jobmanager
+    depends_on:
+      kafka:
+        condition: service_healthy
+      lakekeeper:
+        condition: service_healthy
+      s3g:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        jobmanager.bind-host: 0.0.0.0
+        rest.address: 0.0.0.0
+        rest.bind-address: 0.0.0.0
+
+        jobmanager.memory.process.size: 768m
+        parallelism.default: 2
+
+        execution.checkpointing.interval: 10s
+        execution.checkpointing.mode: EXACTLY_ONCE
+        execution.checkpointing.storage: filesystem
+        execution.checkpointing.dir: s3a://flink-state/checkpoints
+        execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+        execution.checkpointing.num-retained: 3
+
+        fs.s3a.endpoint: http://s3.ozone:9878
+        fs.s3a.path.style.access: true
+        fs.s3a.connection.ssl.enabled: false
+        fs.s3a.access.key: ${S3_ACCESS_KEY:?Set S3_ACCESS_KEY in .env}
+        fs.s3a.secret.key: ${S3_SECRET_KEY:?Set S3_SECRET_KEY in .env}
+    mem_limit: 896m
+    cpus: "0.25"
+    volumes:
+      - ./platform/flink/config/init.sql:/opt/flink/conf/init.sql:ro
+      - ./platform/flink/config/smoke.sql:/opt/flink/conf/smoke.sql:ro
+      - ./platform/flink/jobs:/opt/flink/jobs:ro
+    networks:
+      - lakehouse_net
+    restart: unless-stopped
+
+  flink-taskmanager:
+    image: ozone-lakehouse-flink:2.1.3
+    command: taskmanager
+    depends_on:
+      flink-jobmanager:
+        condition: service_started
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.bind-host: 0.0.0.0
+        taskmanager.numberOfTaskSlots: 2
+        taskmanager.memory.process.size: 1024m
+        taskmanager.memory.managed.fraction: 0.20
+
+        parallelism.default: 2
+
+        execution.checkpointing.interval: 10s
+        execution.checkpointing.mode: EXACTLY_ONCE
+        execution.checkpointing.storage: filesystem
+        execution.checkpointing.dir: s3a://flink-state/checkpoints
+        execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+        execution.checkpointing.num-retained: 3
+
+        fs.s3a.endpoint: http://s3.ozone:9878
+        fs.s3a.path.style.access: true
+        fs.s3a.connection.ssl.enabled: false
+        fs.s3a.access.key: ${S3_ACCESS_KEY:?Set S3_ACCESS_KEY in .env}
+        fs.s3a.secret.key: ${S3_SECRET_KEY:?Set S3_SECRET_KEY in .env}
+    mem_limit: 1152m
+    cpus: "0.65"
+    networks:
+      - lakehouse_net
+    restart: unless-stopped

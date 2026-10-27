@@ -1,0 +1,52 @@
+﻿docker.exe : WARNING: Unknown module: jdk.compiler specified to --add-exports
+At D:\HUST\Ozone\ozone-iceberg-demo\scripts\run-datanode-leader-failure-test.ps1:377 char:18
++         $raw = @(& docker compose exec -T flink-jobmanager bash -lc `
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Unknow...o --add-exports:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: Unknown module: jdk.compiler specified to --add-exports
+WARNING: Unknown module: jdk.compiler specified to --add-exports
+WARNING: Unknown module: jdk.compiler specified to --add-exports
+WARNING: Unknown module: jdk.compiler specified to --add-exports
+Successfully initialized from sql script: /opt/flink/conf/init.sql
+Sep 07, 2026 9:33:14 AM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more 
+information)
+[34;1m[INFO] Executing SQL from file.[0m
+
+Command history file path: /opt/flink/.flink-sql-history
+Flink SQL> [34;1m[INFO] Execute statement succeeded.[0m
+
+Flink SQL> [34;1m[INFO] Execute statement succeeded.[0m
+
+Flink SQL> [34;1m[INFO] Execute statement succeeded.[0m
+
+Flink SQL> [34;1m[INFO] Execute statement succeeded.[0m
+
+Flink SQL> 
+> SELECT COUNT(*)+------------+
+| total_rows |
++------------+
+|     659129 |
++------------+
+1 row in set (5.64 seconds)
+
+Flink SQL> 
+> SELECT
+>     kafka_partition,
+>     MIN(kafka_offset) AS min_offset,
+>     MAX(kafka_offset) AS max_offset,
+>     COUNT(*) AS row_count,
+>     COUNT(DISTINCT kafka_offset)+-----------------+------------+------------+-----------+------------------+
+| kafka_partition | min_offset | max_offset | row_count | distinct_offsets |
++-----------------+------------+------------+-----------+------------------+
+|               0 |          0 |     219683 |    219684 |           219684 |
+|               1 |          0 |     225885 |    225886 |           225886 |
+|               2 |          0 |     213558 |    213559 |           213559 |
++-----------------+------------+------------+-----------+------------------+
+3 rows in set (5.63 seconds)
+
+Flink SQL> 
+Shutting down the session...
+done.

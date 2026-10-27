@@ -1,0 +1,18 @@
+-- Flink -> Lakekeeper -> Iceberg -> Apache Ozone catalog bootstrap
+
+CREATE CATALOG lakehouse WITH (
+  'type' = 'iceberg',
+  'catalog-type' = 'rest',
+  'uri' = 'http://lakekeeper:8181/catalog',
+  'warehouse' = 'lakehouse',
+
+  'io-impl' = 'org.apache.iceberg.aws.s3.S3FileIO',
+  's3.endpoint' = 'http://s3.ozone:9878',
+  's3.region' = 'local-01',
+  's3.path-style-access' = 'true',
+
+  's3.access-key-id' = '{{S3_ACCESS_KEY}}',
+  's3.secret-access-key' = '{{S3_SECRET_KEY}}'
+);
+
+USE CATALOG lakehouse;

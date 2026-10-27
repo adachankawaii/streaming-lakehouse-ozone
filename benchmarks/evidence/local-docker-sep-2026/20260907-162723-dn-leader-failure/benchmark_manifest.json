@@ -1,0 +1,52 @@
+﻿{
+    "run_id":  "20260907-162723-dn-leader-failure",
+    "created_at":  "2026-09-07T16:33:30.2757099+07:00",
+    "experiment":  "Concurrent streaming write under RATIS/THREE leader DataNode interruption",
+    "methodology":  {
+                        "target_datanode":  "datanode2",
+                        "verified_open_ratis_three_leader_pipeline":  "7f9dabfd-21f1-465c-aa41-f1731982118a",
+                        "initial_leader_uuid":  "f02c239a-468c-4f21-9968-f899d3137d40",
+                        "target_rate_eps":  50,
+                        "simulator_duration_s":  240,
+                        "failure_after_s":  30,
+                        "failure_duration_s":  60,
+                        "sampling_interval_s":  10,
+                        "drain_s":  60,
+                        "failure_injection":  "docker compose stop"
+                    },
+    "correctness":  {
+                        "baseline_rows":  647129,
+                        "simulator_attempted":  12000,
+                        "simulator_delivered":  12000,
+                        "simulator_failed":  0,
+                        "final_rows":  659129,
+                        "row_delta":  12000,
+                        "row_delta_matches_delivered":  true,
+                        "final_kafka_lag":  0,
+                        "final_flink_state":  "RUNNING",
+                        "final_checkpoint_completed":  411,
+                        "final_checkpoint_failed":  0,
+                        "final_datanode_container_state":  "running"
+                    },
+    "pass":  true,
+    "notes":  [
+                  "The test verifies that the selected DataNode is leader of at least one OPEN RATIS/THREE pipeline before failure injection.",
+                  "A successful end-to-end result does not prove every written object used the affected pipeline; Ozone may allocate writes across other OPEN pipelines.",
+                  "SCM health and leader metadata can lag physical container failure because failure detection depends on heartbeats/timeouts.",
+                  "Use pipeline/datanode snapshots and timeline timestamps as evidence; do not infer immediate re-election solely from final state."
+              ],
+    "files":  {
+                  "timeline":  "timeline.csv",
+                  "simulator_log":  "simulator.log",
+                  "simulator_stdout":  "simulator.stdout.log",
+                  "simulator_stderr":  "simulator.stderr.log",
+                  "summary":  "summary.csv",
+                  "pipeline_before":  "pipeline_before.txt",
+                  "pipeline_during_failure":  "pipeline_during_failure.txt",
+                  "pipeline_after_restart":  "pipeline_after_restart.txt",
+                  "datanodes_before":  "datanodes_before.txt",
+                  "datanodes_during_failure":  "datanodes_during_failure.txt",
+                  "datanodes_after_restart":  "datanodes_after_restart.txt",
+                  "bronze_final_check":  "bronze_final_check.txt"
+              }
+}

@@ -1,0 +1,36 @@
+ Container ozone-iceberg-demo-kafka-1 Running 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Starting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Started 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Waiting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Exited 
+ Container ozone-iceberg-demo-kafka-1 Waiting 
+ Container ozone-iceberg-demo-kafka-1 Healthy 
+ Container ozone-iceberg-demo-ami-simulator-run-752350281a56 Creating 
+ Container ozone-iceberg-demo-ami-simulator-run-752350281a56 Created 
+
+========================================================================
+AMI CLOCK PLAN
+========================================================================
+Logical meters          : 3,000
+Business interval       : 900s
+Natural business rate   : 3.33 events/s
+Wall-clock run start    : 2026-09-07T10:55:20+07:00
+Business replay start   : 2026-09-07T04:10:20+07:00
+Replay planning mode    : auto-backdated
+Planned emitted records : 80,000
+Estimated replay end    : 2026-09-07T10:50:19.700000+07:00
+Latency rule            : use kafka_timestamp -> ingest_time
+Do NOT use              : ingest_time - event_time_source for accelerated replay
+========================================================================
+
+Connecting to Kafka: kafka:19092
+Topic: ami.meter.events
+
+Stage: ramp-1k | target=1,000.00/s | acceleration=300.0x
+
+Stage: ramp-2k | target=2,000.00/s | acceleration=600.0x
+
+Stage: ramp-5k | target=5,000.00/s | acceleration=1,500.0x
+
+Flushing Kafka producer...
+Final: attempted=80,000, delivered=80,000, failed=0

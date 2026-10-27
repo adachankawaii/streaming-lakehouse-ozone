@@ -1,0 +1,3 @@
+timestamp_utc,stage,last_commit_duration_ms,committed_data_files,committed_records,committed_bytes,seconds_since_last_successful_commit
+2026-09-03T02:07:29.771+00:00,startup,240.0,4,4789,740812,3.0
+2026-09-03T02:07:38.729+00:00,startup,241.0,6,16587,2437014,3.0

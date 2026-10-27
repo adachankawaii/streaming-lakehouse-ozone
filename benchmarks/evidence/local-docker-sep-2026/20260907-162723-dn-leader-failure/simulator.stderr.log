@@ -1,0 +1,10 @@
+time="2026-09-07T16:27:47+07:00" level=warning msg="Found orphan containers ([ozone-iceberg-demo-trino-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container ozone-iceberg-demo-kafka-1 Running 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Starting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Started 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Waiting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Exited 
+ Container ozone-iceberg-demo-kafka-1 Waiting 
+ Container ozone-iceberg-demo-kafka-1 Healthy 
+ Container ozone-iceberg-demo-ami-simulator-run-e891b39a5a5d Creating 
+ Container ozone-iceberg-demo-ami-simulator-run-e891b39a5a5d Created 

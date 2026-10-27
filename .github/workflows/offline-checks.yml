@@ -1,0 +1,18 @@
+name: Offline source checks
+on:
+  push:
+  pull_request:
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline YAML parser
+        run: python -m pip install 'PyYAML>=6,<7'
+      - name: Python syntax check
+        run: python -m compileall -q benchmarks simulator tests
+      - name: Run tests (no Docker required)
+        run: python -m unittest discover -s tests -p 'test_*.py' -v

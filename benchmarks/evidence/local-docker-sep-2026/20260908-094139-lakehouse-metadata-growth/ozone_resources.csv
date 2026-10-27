@@ -1,0 +1,2 @@
+timestamp_utc,elapsed_s,workload_elapsed_s,stage,om_cpu_pct,om_memory_bytes,scm_cpu_pct,scm_memory_bytes,s3g_cpu_pct,s3g_memory_bytes,datanodes_avg_cpu_pct,datanodes_max_cpu_pct,datanodes_total_memory_bytes
+2026-09-08T02:42:04.960+00:00,0.001,1.317,growth-1,0.97,553857843,7.29,544840089,178.19,457913139,0.318,0.59,3213990295

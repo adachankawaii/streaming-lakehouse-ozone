@@ -1,0 +1,9 @@
+include:
+  - path:
+      - ./compose/ozone.yml
+      - ./compose/kafka.yml
+      - ./compose/iceberg-rest.yml
+      - ./compose/flink.yml
+      - ./compose/trino.yml
+      - ./compose/simulator.yml
+    project_directory: .

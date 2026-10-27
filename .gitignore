@@ -1,0 +1,48 @@
+# Private configuration / credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+
+# Build/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+*.jar
+*.class
+build/
+target/
+
+# Runtime/generated benchmark output (historical evidence is stored separately)
+benchmarks/results/*
+!benchmarks/results/.gitkeep
+*.pid
+runtime/
+logs/
+tmp/
+warehouse/
+checkpoints/
+savepoints/
+flink-checkpoints/
+flink-savepoints/
+platform/observability/grafana/data/
+platform/observability/prometheus/data/
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated local catalog configs with S3 credentials
+platform/flink/config/init.sql
+platform/iceberg/config/create-warehouse.json
+platform/trino/catalog/lakehouse.properties

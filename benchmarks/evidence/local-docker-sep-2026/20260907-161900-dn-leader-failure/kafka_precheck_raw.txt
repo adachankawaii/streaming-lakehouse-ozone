@@ -1,0 +1,12 @@
+﻿script_version=v5-kafka-stdout-parser
+parse_error=
+committed_total=635129
+log_end_total=635129
+lag_total=0
+
+----- raw kafka stdout -----
+
+GROUP               TOPIC            PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+bronze-ami-meter-v1 ami.meter.events 0          211684          211684          0               -               -               -
+bronze-ami-meter-v1 ami.meter.events 1          217662          217662          0               -               -               -
+bronze-ami-meter-v1 ami.meter.events 2          205783          205783          0               -               -               -

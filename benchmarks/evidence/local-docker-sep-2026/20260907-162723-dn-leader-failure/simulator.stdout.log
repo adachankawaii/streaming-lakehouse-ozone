@@ -1,0 +1,23 @@
+
+========================================================================
+AMI CLOCK PLAN
+========================================================================
+Logical meters          : 3,000
+Business interval       : 900s
+Natural business rate   : 3.33 events/s
+Wall-clock run start    : 2026-09-07T16:27:50+07:00
+Business replay start   : 2026-09-07T15:27:50+07:00
+Replay planning mode    : auto-backdated
+Planned emitted records : 12,000
+Estimated replay end    : 2026-09-07T16:27:49.700000+07:00
+Latency rule            : use kafka_timestamp -> ingest_time
+Do NOT use              : ingest_time - event_time_source for accelerated replay
+========================================================================
+
+Connecting to Kafka: kafka:19092
+Topic: ami.meter.events
+
+Stage: custom | target=50.00/s | acceleration=15.0x
+
+Flushing Kafka producer...
+Final: attempted=12,000, delivered=12,000, failed=0

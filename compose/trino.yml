@@ -1,0 +1,31 @@
+services:
+  trino:
+    image: trinodb/trino:483
+    hostname: trino
+
+    # The stock image otherwise sizes its JVM heap at up to 80% of all WSL RAM.
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xms256m -Xmx512m -XX:ActiveProcessorCount=1"
+
+    mem_limit: 896m
+    cpus: "0.70"
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./platform/trino/catalog:/etc/trino/catalog:ro
+
+    depends_on:
+      lakekeeper:
+        condition: service_healthy
+      s3g:
+        condition: service_healthy
+
+    networks:
+      - lakehouse_net
+
+    restart: unless-stopped
+
+networks:
+  lakehouse_net:

@@ -1,0 +1,84 @@
+{
+  "run_id": "20260903-094717-ami-ramp",
+  "created_at_utc": "2026-09-03T02:47:20.658+00:00",
+  "job_id": "133afaf0930ebcf6b388f9931613045f",
+  "job_name": "insert-into_lakehouse.bronze.ami_meter_raw",
+  "topic": "ami.meter.events",
+  "consumer_group": "bronze-ami-meter-v1",
+  "stage_seconds": 60,
+  "sample_interval_seconds": 2.0,
+  "storage_sample_interval_seconds": 30.0,
+  "drain_seconds": 120,
+  "ozone_table_path": "ofs://om/s3v/warehouse/bronze-01a042a7-1ca7-7821-9a20-af1df41a0663/ami_meter_raw-01a0475f-7b27-7d51-b0a8-cb678aacb481",
+  "metric_map": {
+    "flink_pending_records": "Source__kafka_ami_meter_events[1].pendingRecords",
+    "flink_current_offset_metrics": [
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.0.currentOffset",
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.1.currentOffset",
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.2.currentOffset"
+    ],
+    "flink_source_native_rate": "Source__kafka_ami_meter_events[1].numRecordsOutPerSecond",
+    "flink_kafka_consumer_rate": "Source__kafka_ami_meter_events[1].KafkaSourceReader.KafkaConsumer.records-consumed-rate",
+    "flink_commits_succeeded": "Source__kafka_ami_meter_events[1].KafkaSourceReader.commitsSucceeded",
+    "flink_commits_failed": "Source__kafka_ami_meter_events[1].KafkaSourceReader.commitsFailed",
+    "iceberg_last_checkpoint_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCheckpointDurationMs",
+    "iceberg_last_commit_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCommitDurationMs",
+    "iceberg_committed_data_files": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesCount",
+    "iceberg_committed_records": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesRecordCount",
+    "iceberg_committed_bytes": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesByteCount",
+    "iceberg_seconds_since_last_commit": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.elapsedSecondsSinceLastSuccessfulCommit"
+  },
+  "kafka_offsets_start": {
+    "0": {
+      "current": 80974,
+      "log_end": 80974,
+      "lag": 0
+    },
+    "1": {
+      "current": 83283,
+      "log_end": 83283,
+      "lag": 0
+    },
+    "2": {
+      "current": 78748,
+      "log_end": 78748,
+      "lag": 0
+    }
+  },
+  "kafka_committed_lag_start": 0,
+  "flink_pending_records_start": 0,
+  "notes": {
+    "kafka_input_rate_eps": "Delta of Kafka LOG-END-OFFSET / wall-clock seconds.",
+    "kafka_committed_consume_rate_eps": "Delta of Kafka consumer-group committed CURRENT-OFFSET / wall-clock seconds. Diagnostic only; it is not treated as the authoritative live Flink backlog.",
+    "flink_pending_records": "Native KafkaSource pendingRecords aggregated across source subtasks. This is the primary live-source backlog signal.",
+    "flink_source_read_rate_eps": "Delta of the sum of KafkaSource per-partition currentOffset gauges divided by wall-clock time. Primary processed/read throughput metric.",
+    "flink_source_native_rate_eps": "Native KafkaSource numRecordsOutPerSecond rate meter. Kept for diagnostics because it is smoothed and can remain nonzero briefly after input stops.",
+    "flink_kafka_consumer_rate_eps": "KafkaConsumer records-consumed-rate aggregated across source subtasks; used as a cross-check.",
+    "ozone_logical_bytes": "Logical file bytes reported by ozone fs -ls, not RATIS physical replicated bytes.",
+    "storage_inventory": "Sampled less frequently to reduce observer overhead."
+  },
+  "completed_at_utc": "2026-09-03T02:52:42.731+00:00",
+  "kafka_offsets_end": {
+    "0": {
+      "current": 83599,
+      "log_end": 240974,
+      "lag": 157375
+    },
+    "1": {
+      "current": 85992,
+      "log_end": 247763,
+      "lag": 161771
+    },
+    "2": {
+      "current": 81314,
+      "log_end": 234268,
+      "lag": 152954
+    }
+  },
+  "final_kafka_committed_lag": 472100,
+  "final_flink_pending_records": 0,
+  "live_source_drained": true,
+  "kafka_offsets_caught_up": false,
+  "drain_complete": false,
+  "drain_complete_basis": "flink_pending_records_and_kafka_committed_lag"
+}

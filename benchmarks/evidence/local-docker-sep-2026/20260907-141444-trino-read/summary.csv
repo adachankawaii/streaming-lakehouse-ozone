@@ -1,0 +1,2 @@
+﻿"run_id","snapshot_id","requested_duration_s","actual_duration_s","query_count","successful_queries","failed_queries","latency_avg_ms","latency_p50_ms","latency_p95_ms","latency_min_ms","latency_max_ms"
+"20260907-141444-trino-read","3521805473207973437","180","180.11","1146","1146","0","155.45","143.12","204.66","117.99","956.95"

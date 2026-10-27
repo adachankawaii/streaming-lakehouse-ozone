@@ -1,0 +1,2 @@
+timestamp_utc,stage,checkpoint_id,duration_ms,size_bytes,trigger_timestamp_ms,external_path
+2026-09-08T02:42:06.371+00:00,growth-1,147,66,1409,1788835317691,s3a://flink-state/checkpoints/1c1a35b403367f0f578b1f0dabf2dfbb/chk-147

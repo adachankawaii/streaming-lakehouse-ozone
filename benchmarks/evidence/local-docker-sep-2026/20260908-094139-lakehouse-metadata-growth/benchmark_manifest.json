@@ -1,0 +1,78 @@
+{
+  "run_id": "20260908-094139-lakehouse-metadata-growth",
+  "collector_version": "v3-fixed-main-dynamic-metrics-correct-ozone-db-paths",
+  "created_at_utc": "2026-09-08T02:42:01.624+00:00",
+  "experiment": "Constant-rate lakehouse metadata/file growth on Apache Ozone",
+  "architecture_under_test": "AMI simulator -> Kafka -> Flink -> Iceberg/Lakekeeper -> Ozone S3 Gateway -> OM/SCM/DataNodes",
+  "job_id": "1c1a35b403367f0f578b1f0dabf2dfbb",
+  "job_name": "insert-into_lakehouse.bronze.ami_meter_raw",
+  "topic": "ami.meter.events",
+  "consumer_group": "bronze-ami-meter-v1",
+  "stages": 2,
+  "stage_seconds": 60,
+  "target_rate_eps": 50.0,
+  "total_workload_seconds": 120,
+  "sample_interval_seconds": 5.0,
+  "storage_sample_interval_seconds": 20.0,
+  "drain_seconds": 60,
+  "ozone_table_path": "ofs://om/s3v/warehouse/bronze-01a066c9-4dc2-74d3-b0e8-a7562bbfce69/ami_meter_raw-01a066c9-76de-7123-96bf-f2fbb5003803",
+  "metric_map": {
+    "flink_pending_records": null,
+    "flink_current_offset_metrics": [
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.0.currentOffset",
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.1.currentOffset",
+      "Source__kafka_ami_meter_events[1].KafkaSourceReader.topic.ami_meter_events.partition.2.currentOffset"
+    ],
+    "iceberg_last_commit_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCommitDurationMs",
+    "iceberg_last_checkpoint_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCheckpointDurationMs",
+    "iceberg_committed_data_files": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesCount",
+    "iceberg_committed_records": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesRecordCount",
+    "iceberg_committed_bytes": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesByteCount",
+    "iceberg_seconds_since_last_commit": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.elapsedSecondsSinceLastSuccessfulCommit"
+  },
+  "kafka_offsets_start": {
+    "0": {
+      "current": 221684,
+      "log_end": 221684,
+      "lag": 0
+    },
+    "1": {
+      "current": 227942,
+      "log_end": 227942,
+      "lag": 0
+    },
+    "2": {
+      "current": 215503,
+      "log_end": 215503,
+      "lag": 0
+    }
+  },
+  "baseline_bronze_rows": 665129,
+  "baseline_inventory": {
+    "ozone_data_files": 217,
+    "ozone_metadata_json_files": 101,
+    "ozone_manifest_files": 109,
+    "ozone_snapshot_files": 244,
+    "ozone_total_files": 671,
+    "ozone_logical_bytes": 101268959,
+    "ozone_iceberg_metadata_files": 454
+  },
+  "baseline_cluster_footprint": {
+    "om_db_bytes": 161869824,
+    "om_ratis_bytes": 17231872,
+    "om_metadata_total_bytes": 364310528,
+    "scm_db_bytes": 153804800,
+    "scm_ratis_bytes": 4386816,
+    "scm_metadata_total_bytes": 243179520,
+    "datanode_hdds_bytes_total": 1076908032
+  },
+  "notes": {
+    "primary_question": "At constant input rate, does write-path performance degrade as Iceberg/Ozone file and metadata counts grow?",
+    "kafka_lag": "Consumer-group committed-offset lag. It is not the authoritative live Flink backlog.",
+    "flink_pending_records": "Primary live-source backlog signal when exposed.",
+    "ozone_inventory": "Real Bronze table namespace from ozone fs -ls -R.",
+    "om_scm_metadata_bytes": "OM DB=/data/metadata/om.db, OM Ratis=/data/metadata/om.ratis; SCM DB=/data/metadata/scm.db, SCM Ratis=/data/metadata/scm.ratis. These are incremental filesystem footprint proxies; LSM/WAL/compaction means byte growth need not be perfectly linear.",
+    "datanode_hdds_bytes_total": "Total /data/hdds footprint across five DataNodes. Includes all cluster data, including checkpoint objects.",
+    "interpretation_limit": "Latency changes can come from Iceberg metadata/catalog, S3G and Ozone together. Use OM/SCM/S3G resource metrics and namespace growth to reason about where pressure appears."
+  }
+}

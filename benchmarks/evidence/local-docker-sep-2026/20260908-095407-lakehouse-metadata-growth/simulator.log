@@ -1,0 +1,33 @@
+time="2026-09-08T09:54:25+07:00" level=warning msg="Found orphan containers ([ozone-iceberg-demo-trino-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container ozone-iceberg-demo-kafka-1 Running 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Starting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Started 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Waiting 
+ Container ozone-iceberg-demo-kafka-volume-init-1 Exited 
+ Container ozone-iceberg-demo-kafka-1 Waiting 
+ Container ozone-iceberg-demo-kafka-1 Healthy 
+ Container ozone-iceberg-demo-ami-simulator-run-6396d0dc567a Creating 
+ Container ozone-iceberg-demo-ami-simulator-run-6396d0dc567a Created 
+
+========================================================================
+AMI CLOCK PLAN
+========================================================================
+Logical meters          : 3,000
+Business interval       : 900s
+Natural business rate   : 3.33 events/s
+Wall-clock run start    : 2026-09-08T09:54:28+07:00
+Business replay start   : 2026-09-07T23:24:28+07:00
+Replay planning mode    : auto-backdated
+Planned emitted records : 126,000
+Estimated replay end    : 2026-09-08T09:54:27.700000+07:00
+Latency rule            : use kafka_timestamp -> ingest_time
+Do NOT use              : ingest_time - event_time_source for accelerated replay
+========================================================================
+
+Connecting to Kafka: kafka:19092
+Topic: ami.meter.events
+
+Stage: custom | target=100.00/s | acceleration=30.0x
+
+Flushing Kafka producer...
+Final: attempted=126,000, delivered=126,000, failed=0

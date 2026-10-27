@@ -1,0 +1,63 @@
+{
+  "run_id": "20260903-090715-ami-ramp",
+  "created_at_utc": "2026-09-03T02:07:19.035+00:00",
+  "job_id": "133afaf0930ebcf6b388f9931613045f",
+  "job_name": "insert-into_lakehouse.bronze.ami_meter_raw",
+  "topic": "ami.meter.events",
+  "consumer_group": "bronze-ami-meter-v1",
+  "stage_seconds": 10,
+  "sample_interval_seconds": 2.0,
+  "storage_sample_interval_seconds": 10.0,
+  "drain_seconds": 10,
+  "ozone_table_path": "ofs://om/s3v/warehouse/bronze-01a042a7-1ca7-7821-9a20-af1df41a0663/ami_meter_raw-01a0475f-7b27-7d51-b0a8-cb678aacb481",
+  "metric_map": {
+    "flink_source_num_records_out": "numRecordsOut",
+    "iceberg_last_checkpoint_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCheckpointDurationMs",
+    "iceberg_last_commit_duration_ms": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.lastCommitDurationMs",
+    "iceberg_committed_data_files": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesCount",
+    "iceberg_committed_records": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesRecordCount",
+    "iceberg_committed_bytes": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.committedDataFilesByteCount",
+    "iceberg_seconds_since_last_commit": "IcebergFilesCommitter.IcebergFilesCommitter.table.lakehouse_bronze_ami_meter_raw.elapsedSecondsSinceLastSuccessfulCommit"
+  },
+  "kafka_offsets_start": {
+    "0": {
+      "current": 1003,
+      "log_end": 1003,
+      "lag": 0
+    },
+    "1": {
+      "current": 1029,
+      "log_end": 1029,
+      "lag": 0
+    },
+    "2": {
+      "current": 973,
+      "log_end": 973,
+      "lag": 0
+    }
+  },
+  "notes": {
+    "kafka_input_rate_eps": "Delta of Kafka LOG-END-OFFSET / wall-clock seconds.",
+    "kafka_committed_consume_rate_eps": "Delta of committed consumer-group CURRENT-OFFSET / wall-clock seconds; changes at checkpoint commits.",
+    "ozone_logical_bytes": "Logical file bytes reported by ozone fs -ls, not RATIS physical replicated bytes.",
+    "storage_inventory": "Sampled less frequently to reduce observer overhead."
+  },
+  "completed_at_utc": "2026-09-03T02:08:06.761+00:00",
+  "kafka_offsets_end": {
+    "0": {
+      "current": 5531,
+      "log_end": 27660,
+      "lag": 22129
+    },
+    "1": {
+      "current": 5687,
+      "log_end": 28447,
+      "lag": 22760
+    },
+    "2": {
+      "current": 5374,
+      "log_end": 26898,
+      "lag": 21524
+    }
+  }
+}

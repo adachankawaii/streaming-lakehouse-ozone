@@ -1,0 +1,2 @@
+stage,samples,target_rate_eps,avg_kafka_input_rate_eps,p95_kafka_input_rate_eps,avg_flink_source_native_rate_eps,max_kafka_lag,end_kafka_lag,checkpoint_count,checkpoint_duration_p50_ms,checkpoint_duration_p95_ms,iceberg_commit_events,iceberg_commit_duration_p50_ms,iceberg_commit_duration_p95_ms,max_seconds_since_last_commit,end_committed_records,end_committed_data_files,end_ozone_data_files,end_ozone_logical_bytes
+collector-only,5,0.0,0.0,0.0,0.0,0,0,2,47.5,47.95,0,,,27.0,,,16,24143764

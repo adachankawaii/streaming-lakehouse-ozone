@@ -1,0 +1,3 @@
+timestamp_utc,stage,checkpoint_id,duration_ms,size_bytes,trigger_timestamp_ms,external_path
+2026-09-03T02:46:39.113+00:00,collector-only,388,57,1409,1788403598398,s3a://flink-state/checkpoints/133afaf0930ebcf6b388f9931613045f/chk-388
+2026-09-03T02:46:47.916+00:00,collector-only,389,43,1409,1788403608398,s3a://flink-state/checkpoints/133afaf0930ebcf6b388f9931613045f/chk-389

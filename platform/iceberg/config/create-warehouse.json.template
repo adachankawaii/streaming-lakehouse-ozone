@@ -1,0 +1,39 @@
+{
+  "warehouse-name": "lakehouse",
+
+  "delete-profile": {
+    "type": "hard"
+  },
+
+  "storage-profile": {
+    "type": "s3",
+
+    "bucket": "warehouse",
+
+    "region": "local-01",
+
+    "endpoint": "http://s3.ozone:9878",
+
+    "flavor": "s3-compat",
+
+    "path-style-access": true,
+
+    "sts-enabled": false,
+
+    "remote-signing-enabled": false,
+
+    "storage-layout": {
+      "type": "full-hierarchy",
+      "namespace": "{name}-{uuid}",
+      "tabular": "{name}-{uuid}"
+    }
+  },
+
+  "storage-credential": {
+    "type": "s3",
+    "credential-type": "access-key",
+
+    "aws-access-key-id": "{{S3_ACCESS_KEY}}",
+    "aws-secret-access-key": "{{S3_SECRET_KEY}}"
+  }
+}

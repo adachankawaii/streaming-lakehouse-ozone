@@ -1,0 +1,110 @@
+services:
+  lakekeeper-db:
+    image: postgres:17
+    hostname: lakekeeper-db
+    environment:
+      POSTGRES_DB: ${LAKEKEEPER_DB_NAME:-lakekeeper}
+      POSTGRES_USER: ${LAKEKEEPER_DB_USER:-lakekeeper}
+      POSTGRES_PASSWORD: ${LAKEKEEPER_DB_PASSWORD:?Set LAKEKEEPER_DB_PASSWORD in .env}
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    mem_limit: 256m
+    cpus: "0.15"
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${LAKEKEEPER_DB_USER:-lakekeeper} -d ${LAKEKEEPER_DB_NAME:-lakekeeper}"
+        ]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+
+    volumes:
+      - lakekeeper_pg:/var/lib/postgresql/data
+
+    networks:
+      - lakehouse_net
+
+    restart: unless-stopped
+
+
+  lakekeeper-migrate:
+    image: quay.io/lakekeeper/catalog:v0.13.1
+
+    environment:
+      LAKEKEEPER__PG_ENCRYPTION_KEY: ${LAKEKEEPER_PG_ENCRYPTION_KEY:?Set LAKEKEEPER_PG_ENCRYPTION_KEY in .env}
+
+      LAKEKEEPER__PG_DATABASE_URL_READ: >-
+        postgresql://${LAKEKEEPER_DB_USER:-lakekeeper}:${LAKEKEEPER_DB_PASSWORD}@lakekeeper-db:5432/${LAKEKEEPER_DB_NAME:-lakekeeper}
+
+      LAKEKEEPER__PG_DATABASE_URL_WRITE: >-
+        postgresql://${LAKEKEEPER_DB_USER:-lakekeeper}:${LAKEKEEPER_DB_PASSWORD}@lakekeeper-db:5432/${LAKEKEEPER_DB_NAME:-lakekeeper}
+
+      LAKEKEEPER__AUTHZ_BACKEND: allowall
+
+    command: ["migrate"]
+
+    mem_limit: 128m
+    cpus: "0.10"
+
+    depends_on:
+      lakekeeper-db:
+        condition: service_healthy
+
+    networks:
+      - lakehouse_net
+
+    restart: "no"
+
+
+  lakekeeper:
+    image: quay.io/lakekeeper/catalog:v0.13.1
+    hostname: lakekeeper
+
+    environment:
+      LAKEKEEPER__PG_ENCRYPTION_KEY: ${LAKEKEEPER_PG_ENCRYPTION_KEY:?Set LAKEKEEPER_PG_ENCRYPTION_KEY in .env}
+
+      LAKEKEEPER__PG_DATABASE_URL_READ: >-
+        postgresql://${LAKEKEEPER_DB_USER:-lakekeeper}:${LAKEKEEPER_DB_PASSWORD}@lakekeeper-db:5432/${LAKEKEEPER_DB_NAME:-lakekeeper}
+
+      LAKEKEEPER__PG_DATABASE_URL_WRITE: >-
+        postgresql://${LAKEKEEPER_DB_USER:-lakekeeper}:${LAKEKEEPER_DB_PASSWORD}@lakekeeper-db:5432/${LAKEKEEPER_DB_NAME:-lakekeeper}
+
+      LAKEKEEPER__AUTHZ_BACKEND: allowall
+
+    command: ["serve"]
+
+    mem_limit: 256m
+    cpus: "0.20"
+
+    depends_on:
+      lakekeeper-migrate:
+        condition: service_completed_successfully
+
+    ports:
+      - "8181:8181"
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/home/nonroot/lakekeeper",
+          "healthcheck"
+        ]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+      start_period: 5s
+
+    networks:
+      - lakehouse_net
+
+    restart: unless-stopped
+
+
+volumes:
+  lakekeeper_pg:
+

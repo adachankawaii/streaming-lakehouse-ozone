@@ -1,0 +1,4 @@
+stage,samples,target_rate_eps,avg_kafka_input_rate_eps,p95_kafka_input_rate_eps,avg_flink_source_rate_eps,max_kafka_lag,end_kafka_lag,checkpoint_count,checkpoint_duration_p50_ms,checkpoint_duration_p95_ms,iceberg_commit_events,iceberg_commit_duration_p50_ms,iceberg_commit_duration_p95_ms,max_seconds_since_last_commit,end_committed_records,end_committed_data_files,end_ozone_data_files,end_ozone_logical_bytes
+ramp-1k,5,1000.0,862.78,923.11,0.0,9250,9250,0,,,0,,,32.0,83000,11,14,12714768
+ramp-2k,5,2000.0,1779.87,1863.0,0.0,28100,28100,0,,,0,,,41.0,83000,11,14,12714768
+ramp-5k,5,5000.0,4371.67,4662.22,0.0,73750,73750,0,,,0,,,52.0,83000,11,14,12714768

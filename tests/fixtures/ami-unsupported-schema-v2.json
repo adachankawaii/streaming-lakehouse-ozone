@@ -1,0 +1,19 @@
+{
+  "schema_version": "2.0",
+  "event_id": "ami-e-schema2-000001",
+  "event_type": "READING",
+  "meter_id": "M00130",
+  "usage_point_id": "UP00130",
+  "event_time": "2026-08-28T16:05:10+07:00",
+  "sequence_no": 3,
+  "interval_seconds": 900,
+  "phase_count": 1,
+  "voltage_l1_v": 227.8,
+  "current_l1_a": 11.7,
+  "active_power_kw": 2.60,
+  "frequency_hz": 49.99,
+  "power_factor": 0.975,
+  "meter_status": "NORMAL",
+  "quality_code": "GOOD",
+  "firmware_version": "2.0-demo"
+}
